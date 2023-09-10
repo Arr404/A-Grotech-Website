@@ -5,11 +5,6 @@ import {useState} from "react";
 import Swal from 'sweetalert2'
 import jwt from 'jsonwebtoken';
 
-export const metadata = {
-  title: 'Delete',
-  description: 'Page description',
-}
-
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
