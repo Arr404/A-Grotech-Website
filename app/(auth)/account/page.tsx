@@ -60,6 +60,8 @@ export default function SignUp() {
         .then(data => {
 
           console.log(data)
+          localStorage.setItem("SavedToken", 'Bearer ' + data.token);
+
           // Access the user ID from the response data
           const userId = decodeFromToken(data.token);
           handleDeleteUser(userId)
@@ -78,6 +80,9 @@ export default function SignUp() {
   const handleDeleteUser = (userId: string) => {
     fetch(`https://agrotech-api.agilf.dev/api/User/${userId}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('SavedToken'),
+      },
     })
         .then(response => {
           if (response.ok) {
