@@ -59,11 +59,11 @@ export default function SignUp() {
         })
         .then(data => {
 
-          console.log(data.token);
-          localStorage.setItem("SavedToken", 'Bearer ' + data.token);
+          console.log(data.data.token);
+          localStorage.setItem("SavedToken", 'Bearer ' + data.data.token);
 
           // Access the user ID from the response data
-          const userId = decodeFromToken(data.token);
+          const userId = decodeFromToken(data.data.token);
           handleDeleteUser(userId)
           // Perform any actions with the user ID
         })
