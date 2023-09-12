@@ -59,7 +59,7 @@ export default function SignUp() {
         })
         .then(data => {
 
-          console.log(data)
+          console.log(data.token);
           localStorage.setItem("SavedToken", 'Bearer ' + data.token);
 
           // Access the user ID from the response data
