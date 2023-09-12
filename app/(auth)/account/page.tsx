@@ -1,9 +1,9 @@
 // noinspection TypeScriptValidateTypes
 
 'use client'
-import {useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import Swal from 'sweetalert2'
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 
 export default function SignUp() {
@@ -12,16 +12,16 @@ export default function SignUp() {
     password: '',
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
     });
   };
 
-  const decodeFromToken = (token) => {
+  const decodeFromToken = (token: string) => {
     try {
-      const {nameid} = jwt.decode(token, "Yahahaha-Hayukkkkkk-Mengerikannnn-Yang-Benerrttttttttt");
+  const {nameid} = jwt.decode(token) as JwtPayload;
       return nameid
 
       //const userId = decodedToken.userId;
@@ -32,7 +32,7 @@ export default function SignUp() {
       return null
     }
   };
-  const getUserId = (email, password) => {
+  const getUserId = (email: string, password: string) => {
     fetch('https://agrotech-api.agilf.dev/api/auth/Login', {
       method: 'POST',
       headers: {
@@ -75,7 +75,7 @@ export default function SignUp() {
           console.error(error);
         });
   };
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = (userId: string) => {
     fetch(`https://agrotech-api.agilf.dev/api/User/${userId}`, {
       method: 'DELETE',
     })
@@ -107,7 +107,7 @@ export default function SignUp() {
           console.error(error);
         });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Access the form data from the state object
     const { email, password } = formData;
@@ -157,7 +157,7 @@ export default function SignUp() {
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
-            <form  onSubmit={handleSubmit}>
+            <form  onSubmit={(e) => handleSubmit(e)}>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
