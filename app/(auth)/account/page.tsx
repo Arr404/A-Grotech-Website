@@ -21,8 +21,8 @@ export default function SignUp() {
 
   const decodeFromToken = (token: string) => {
     try {
-    const decodedToken = jwt.verify(token, "Yahahaha-Hayukkkkkk-Mengerikannnn-Yang-Benerrttttttttt") as { [key: string]: any };
-      return decodedToken.nameid
+    const {nameid} = jwt.verify(token, "Yahahaha-Hayukkkkkk-Mengerikannnn-Yang-Benerrttttttttt") as { [key: string]: any };
+      return nameid
 
       //const userId = decodedToken.userId;
       // Perform any actions with the user ID
@@ -60,7 +60,7 @@ export default function SignUp() {
         .then(data => {
 
           console.log(data.data.token);
-          localStorage.setItem("SavedToken", 'Bearer ' + data.data.token);
+          localStorage.setItem("SavedToken", data.data.token);
 
           // Access the user ID from the response data
           const userId = decodeFromToken(data.data.token);
