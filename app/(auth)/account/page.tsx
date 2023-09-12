@@ -21,7 +21,7 @@ export default function SignUp() {
 
   const decodeFromToken = (token: string) => {
     try {
-    const {nameid} = jwt.verify(token, "Yahahaha-Hayukkkkkk-Mengerikannnn-Yang-Benerrttttttttt") as { [key: string]: any };
+    const {nameid} = jwt.decode(token) as { [key: string]: any };
       return nameid
 
       //const userId = decodedToken.userId;
